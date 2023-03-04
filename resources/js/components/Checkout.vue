@@ -58,6 +58,13 @@
                             <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                             <div class="mt-1">
                                 <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    <option
+                                        v-for="country in countries"
+                                        :key="country"
+                                        :value="country"
+                                    >
+                                        {{ country }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -97,22 +104,42 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {computed} from 'vue'
+import store from '../store'
 import OrderSummary from './OrderSummary.vue'
 
-function submit(e) {
-    const email = e.target.elements['email-address'].value
-    const first_name = e.target.elements['first-name'].value
-    const last_name = e.target.elements['last-name'].value
-    const address = e.target.elements['address'].value
-    const apartment = e.target.elements['apartment'].value
-    const city = e.target.elements['city'].value
-    const country = e.target.elements['country'].value
-    const region = e.target.elements['region'].value
-    const postal_code = e.target.elements['postal-code'].value
-    const phone = e.target.elements['phone'].value
+const countries = [
+    'United States',
+    'Canada',
+]
 
-    console.log(e)
+const products = computed(() => store.getters['products/products'])
+
+const shipping = computed(() => store.getters['products/shipping'])
+
+const subtotal = computed(() => store.getters['products/subtotal'])
+
+const total = computed(() => store.getters['products/total'])
+
+function submit(e) {
+    const form = {
+        email: e.target.elements['email-address'].value,
+        first_name: e.target.elements['first-name'].value,
+        last_name: e.target.elements['last-name'].value,
+        address: e.target.elements['address'].value,
+        apartment: e.target.elements['apartment'].value,
+        city: e.target.elements['city'].value,
+        country: e.target.elements['country'].value,
+        region: e.target.elements['region'].value,
+        postal_code: e.target.elements['postal-code'].value,
+        phone: e.target.elements['phone'].value,
+        products: products.value,
+        shipping: shipping.value,
+        subtotal: subtotal.value,
+        total: total.value,
+    }
+
+    console.log(form)
 }
 
 </script>

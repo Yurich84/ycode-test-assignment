@@ -37,33 +37,23 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
-
+import {computed} from 'vue'
 import ProductItem from './ProductItem'
+import store from '../store'
 
-const products = ref([])
-
-fetchProducts()
-
-async function fetchProducts() {
-    const {data} = await axios.get('api/products')
-    products.value = data
-    products.value.map(p => {
-        p.count = 1
-        p.total = p.price
-    })
-
-}
+store.dispatch('products/fetchProducts')
 
 function count(product, num) {
     product.count = num
     product.total = product.price * num
 }
 
-const shipping = ref(5)
+const products = computed(() => store.getters['products/products'])
 
-const subtotal = computed(() => _.sumBy(products.value, 'total'))
+const shipping = computed(() => store.getters['products/shipping'])
 
-const total = computed(() => shipping.value + subtotal.value)
+const subtotal = computed(() => store.getters['products/subtotal'])
+
+const total = computed(() => store.getters['products/total'])
 
 </script>
