@@ -33,23 +33,25 @@ class OrderDTO extends YcodeDTO
     protected function rules(): array
     {
         return [
-            'id' => ['required', 'string'],
-            'ycode_id' => ['required', 'string'],
-            'name' => ['required', 'string'],
-            'slug' => ['required', 'string'],
-            'created_at' => ['required', 'string'],
-            'updated_at' => ['required', 'string'],
-            'subtotal' => ['required', 'string'],
-            'shipping' => ['string'],
-            'customer_name' => ['required', 'string'],
+            'id' => ['string'],
+            'ycode_id' => ['string'],
+            'name' => ['string'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'slug' => ['string'],
+            'created_at' => ['string'],
+            'updated_at' => ['string'],
+            'subtotal' => ['required'],
+            'shipping' => ['required'],
+            'customer_name' => ['string'],
             'email' => ['required', 'string'],
             'address1' => ['required', 'string'],
             'address2' => ['string'],
             'city' => ['required', 'string'],
             'country' => ['required', 'string'],
             'state' => ['required', 'string'],
-            'zip' => ['required', 'string'],
-            'total' => ['required', 'string'],
+            'zip' => ['required'],
+            'total' => ['required'],
         ];
     }
 
@@ -60,7 +62,9 @@ class OrderDTO extends YcodeDTO
      */
     protected function defaults(): array
     {
-        return [];
+        return [
+            'customer_name' => $this->customer_name ?? ($this->first_name.' '.$this->last_name),
+        ];
     }
 
     /**
