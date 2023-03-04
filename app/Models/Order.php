@@ -11,6 +11,6 @@ class Order extends Model
 
     protected $guarded = ['id', 'ycode_id'];
 
-    protected $hidden = 'ycode_id';
+    protected $hidden = ['ycode_id'];
 
 }
