@@ -23,7 +23,16 @@ or deploy it manually
 - `touch database/database.sqlite`
 - `composer install`
 - `php artisan key:generate`
-- `php artisan migrate`
+- `php artisan migrate --seed`
+
+Add Ycode credentials
+
+
+- `YCODE_API_URL`
+- `YCODE_API_TOKEN`
+- `YCODE_PRODUCTS_COLLECTION`
+- `YCODE_ORDERS_COLLECTION`
+- `YCODE_ORDER_ITEMS_COLLECTION`
 
 ## Testing
 
