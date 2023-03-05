@@ -75,7 +75,7 @@ class OrderDTO extends YcodeDTO
     protected function defaults(): array
     {
         return [
-            'customer_name' => $this->customer_name ?? ($this->first_name.' '.$this->last_name),
+            'customer_name' => $this->customer_name ?? $this->data['customer_name'] ?? ($this->first_name.' '.$this->last_name),
         ];
     }
 

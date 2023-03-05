@@ -63,7 +63,9 @@ class OrderItemDTO extends YcodeDTO
     {
         return [
             'product_id' => $this->product_id ?? Product::where('ycode_id', $this->product)->first()->id,
-            'order_id' => $this->order_id ?? Order::where('ycode_id', $this->order)->first()->id
+            'order_id' => $this->order_id ?? Order::where('ycode_id', $this->order)->first()->id,
+            'product' => $this->product ?? Product::find($this->product_id)->ycode_id,
+            'order' => $this->order ?? Order::find($this->order_id)->ycode_id
         ];
     }
 

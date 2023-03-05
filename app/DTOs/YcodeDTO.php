@@ -31,8 +31,8 @@ abstract class YcodeDTO extends ValidatedDTO implements ToYcode
         $ycode_data = [];
 
         foreach (static::KEY_MAPPING as $model_key => $ycode_key) {
-            if (isset($this->validatedData->{$model_key})) {
-                $ycode_data[$ycode_key] = $this->validatedData->{$model_key};
+            if (isset($this->validatedData[$model_key])) {
+                $ycode_data[$ycode_key] = $this->validatedData[$model_key];
             }
         }
         return $ycode_data;
