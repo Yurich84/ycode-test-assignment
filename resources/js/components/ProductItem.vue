@@ -7,7 +7,7 @@
         <div class="flex">
             <div class="min-w-0 flex-1">
                 <h4 class="text-sm">
-                    <a href="#" class="font-medium text-gray-700 hover:text-gray-800">{{ product.name}}</a>
+                    <a href="#" class="font-medium text-gray-700 hover:text-gray-800">{{ $filter.price(product.name) }}</a>
                 </h4>
                 <p class="mt-1 text-sm text-gray-500">{{ product.color }}</p>
             </div>
