@@ -52,7 +52,7 @@
             "@php -r \"file_exists('./database/database.sqlite') || file_put_contents('./database/database.sqlite', '');\"",
             "composer install",
             "@php artisan key:generate --ansi",
-            "@php artisan migrate"
+            "@php artisan migrate --seed"
         ]
     },
     "extra": {
