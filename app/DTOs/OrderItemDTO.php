@@ -4,6 +4,7 @@ namespace App\DTOs;
 
 use App\Models\Order;
 use App\Models\Product;
+use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 
 class OrderItemDTO extends YcodeDTO
 {
@@ -26,17 +27,31 @@ class OrderItemDTO extends YcodeDTO
      */
     protected function rules(): array
     {
-        return [
-            'id' => ['required', 'string'],
-            'ycode_id' => ['required', 'string'],
-            'name' => ['required', 'string'],
-            'slug' => ['required', 'string'],
-            'created_at' => ['required', 'string'],
-            'updated_at' => ['required', 'string'],
-            'product' => ['required', 'string'],
+        $rules = [
             'quantity' => ['required', 'numeric'],
-            'order' => ['required', 'string'],
         ];
+
+        if (!$this->comeFromYcode) {
+            $rules = [
+                ...$rules,
+                'product_id' => ['required', 'numeric'],
+                'order_id' => ['required', 'numeric'],
+            ];
+        } else {
+            $rules = [
+                ...$rules,
+                'id' => ['required', 'string'],
+                'ycode_id' => ['required', 'string'],
+                'slug' => ['required', 'string'],
+                'name' => ['required', 'string'],
+                'product' => ['required', 'string'],
+                'order' => ['required', 'string'],
+                'created_at' => ['required', 'string'],
+                'updated_at' => ['required', 'string'],
+            ];
+        }
+
+        return $rules;
     }
 
     /**
@@ -47,8 +62,8 @@ class OrderItemDTO extends YcodeDTO
     protected function defaults(): array
     {
         return [
-            'product_id' => Product::where('ycode_id', $this->product)->first()->id,
-            'order_id' => Order::where('ycode_id', $this->order)->first()->id
+            'product_id' => $this->product_id ?? Product::where('ycode_id', $this->product)->first()->id,
+            'order_id' => $this->order_id ?? Order::where('ycode_id', $this->order)->first()->id
         ];
     }
 
@@ -59,7 +74,9 @@ class OrderItemDTO extends YcodeDTO
      */
     protected function casts(): array
     {
-        return [];
+        return [
+            'id' => new IntegerCast(),
+        ];
     }
 
     /**

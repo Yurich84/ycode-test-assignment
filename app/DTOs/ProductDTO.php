@@ -25,15 +25,23 @@ class ProductDTO extends YcodeDTO
      */
     protected function rules(): array
     {
-        return [
-            'id' => ['required'],
-            'ycode_id' => ['required'],
+        $rules = [
             'name' => ['required'],
-            'slug' => ['string'],
             'color' => ['string'],
             'image' => ['string'],
             'price' => ['required'],
         ];
+
+        if ($this->comeFromYcode) {
+            $rules = [
+                ...$rules,
+                'id' => ['required', 'string'],
+                'ycode_id' => ['required', 'string'],
+                'slug' => ['required', 'string'],
+            ];
+        }
+
+        return $rules;
     }
 
     /**

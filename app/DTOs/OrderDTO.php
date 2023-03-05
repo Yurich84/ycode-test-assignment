@@ -32,27 +32,39 @@ class OrderDTO extends YcodeDTO
      */
     protected function rules(): array
     {
-        return [
-            'id' => ['string'],
-            'ycode_id' => ['string'],
-            'name' => ['string'],
-            'first_name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'slug' => ['string'],
-            'created_at' => ['string'],
-            'updated_at' => ['string'],
-            'subtotal' => ['required'],
-            'shipping' => ['required'],
-            'customer_name' => ['string'],
+        $rules = [
             'email' => ['required', 'string'],
             'address1' => ['required', 'string'],
-            'address2' => ['string'],
+            'address2' => ['required', 'string'],
             'city' => ['required', 'string'],
             'country' => ['required', 'string'],
             'state' => ['required', 'string'],
             'zip' => ['required'],
+            'shipping' => ['required'],
+            'subtotal' => ['required'],
             'total' => ['required'],
         ];
+
+        if ($this->comeFromRequest) {
+            $rules = [
+                ...$rules,
+                'first_name' => ['required', 'string'],
+                'last_name' => ['required', 'string'],
+            ];
+        } elseif ($this->comeFromYcode) {
+            $rules = [
+                ...$rules,
+                'id' => ['string'],
+                'ycode_id' => ['string'],
+                'customer_name' => ['string'],
+                'name' => ['string'],
+                'slug' => ['string'],
+                'created_at' => ['string'],
+                'updated_at' => ['string'],
+            ];
+        }
+
+        return $rules;
     }
 
     /**

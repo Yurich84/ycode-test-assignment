@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->string('ycode_id');
-            $table->string('name');
-            $table->string('slug');
+            $table->string('ycode_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->foreignIdFor(Product::class);
             $table->foreignIdFor(Order::class);
             $table->unsignedSmallInteger('quantity');
