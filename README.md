@@ -1,25 +1,40 @@
-# Ycode Test Assignment.
+<p align="center">
+<img height="80" src="https://laravel.com/img/logomark.min.svg">
+<img height="80" src="https://vuejs.org/images/logo.png" alt="Vue logo">
+</p>
 
-Ycode is being used as internal dashboard for managing orders of an e-shop. Here's an example:
-https://orders.ycodeapp.com.
+## Extensions
 
-Your task is to build an external orders page that would submit orders through Ycode API and save them to the database, so that the team could see them in the dashboard like in the example.
+- [Laravel 10](https://laravel.com/)
+- [Vue3 Composition Api](https://vuejs.org)
+- [Lodash](https://lodash.com) js utilities
 
-We've provided a starting point for your checkout form's HTML.
+## Install
 
-We've also created a Ycode project for you to clone, complete with collections you'll need to interact with via the Ycode API.
-
-Use small commits and descriptive commit messages while working on the assignment. One commit solving one issue.
-
-We expect you to demonstrate both your back-end and front-end skills.
-
-Please do the following before starting to get setup:
-
-1. Sign up for a Ycode account by following the link https://app.ycode.com/register, or login if you already have one.
-2. Clone the project you will need for the test by visiting this link https://2241b135-25c6-413d-98ba-5e4048f59d5b-app15392.ycodeapp.com/ and clicking "Clone project". This should then redirect you into this project on your account.
-3. Generate an API key for your cloned project. This is what you will need to interact with the Ycode API. You can find instructions here: https://developers.ycode.com/docs
+- `git clone git@github.com:Yurich84/ycode-test-assignment.git`
+- `cd ycode-test-assignment`
 
 
----
+- `composer install-app` - this will deploy project
 
-Use this repository as your starting point but **DO NOT** fork it. Create a private repository on GitHub for your application source code, push it and invite the username of "liamwalder" as a collaborator via "Settings > Manage access".
+or deploy it manually
+
+- `cp .env.example .env`
+- `touch database/database.sqlite`
+- `composer install`
+- `php artisan key:generate`
+- `php artisan migrate`
+
+## Testing
+
+- `php artisan test`
+
+## Run
+
+- `php artisan serv`
+- `npm run dev`
+
+go to http://localhost:8000
+
+## Description
+For ease of deployment, the application runs on sqlite.
