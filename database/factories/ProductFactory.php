@@ -17,6 +17,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
+            'ycode_id' => $this->faker->uuid,
             'name' => $this->faker->word,
             'color' => $this->faker->colorName,
             'price' => $this->faker->numberBetween(20, 50),
