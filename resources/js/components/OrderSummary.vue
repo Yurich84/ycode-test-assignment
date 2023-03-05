@@ -31,7 +31,7 @@
                 </div>
             </dl>
 
-            <slot></slot>
+            <slot :loading="loading"></slot>
         </div>
     </div>
 </template>
@@ -40,6 +40,13 @@
 import {computed} from 'vue'
 import ProductItem from './ProductItem'
 import store from '../store'
+
+const props = defineProps({
+    loading: {
+        type: Boolean,
+        default: false,
+    }
+})
 
 store.dispatch('products/fetchProducts')
 
