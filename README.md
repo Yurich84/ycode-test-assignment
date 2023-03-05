@@ -46,4 +46,4 @@ Add Ycode credentials
 go to http://localhost:8000
 
 ## Description
-For ease of deployment, the application runs on sqlite.
+For ease of deployment, the application runs on sqlite, but you also can run it in docker instead.
