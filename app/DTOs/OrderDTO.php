@@ -34,6 +34,7 @@ class OrderDTO extends YcodeDTO
     {
         $rules = [
             'email' => ['required', 'string'],
+            'phone' => ['required', 'string'],
             'address1' => ['required', 'string'],
             'address2' => ['required', 'string'],
             'city' => ['required', 'string'],

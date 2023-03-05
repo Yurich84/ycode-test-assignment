@@ -3,9 +3,10 @@
 namespace App\Services\Ycode;
 
 use Exception;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -21,16 +22,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class YcodeService
 {
-    private Client $client;
+    private PendingRequest $http;
 
     private string $token;
 
     public function __construct()
     {
         $this->token = config('ycode.token');
-        $this->client = new Client([
-            'base_uri' => config('ycode.url'),
-        ]);
+        $this->http = Http::baseUrl(config('ycode.url'));
     }
 
     /**
@@ -70,10 +69,7 @@ class YcodeService
             $header['content-type'] = 'application/json';
         }
 
-        $response = $this->client->request($method, $url, [
-            'headers' => $header,
-            'body' => json_encode($data)
-        ]);
+        $response = $this->http->withHeaders($header)->{$method}($url, $data);
         if ($response->getStatusCode() === 200) {
             return $response->getBody()->getContents();
         } else {
