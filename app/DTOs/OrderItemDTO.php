@@ -31,13 +31,7 @@ class OrderItemDTO extends YcodeDTO
             'quantity' => ['required', 'numeric'],
         ];
 
-        if (!$this->comeFromYcode) {
-            $rules = [
-                ...$rules,
-                'product_id' => ['required', 'numeric'],
-                'order_id' => ['required', 'numeric'],
-            ];
-        } else {
+        if ($this->comeFromYcode) {
             $rules = [
                 ...$rules,
                 'id' => ['required', 'string'],
@@ -48,6 +42,12 @@ class OrderItemDTO extends YcodeDTO
                 'order' => ['required', 'string'],
                 'created_at' => ['required', 'string'],
                 'updated_at' => ['required', 'string'],
+            ];
+        } else {
+            $rules = [
+                ...$rules,
+                'product_id' => ['required', 'numeric'],
+                'order_id' => ['required', 'numeric'],
             ];
         }
 
